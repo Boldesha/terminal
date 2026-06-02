@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <sstream>
-
+#include <limits>
 
 
 Terminal::Terminal() : root(new Directory("root")), current(root) {}
