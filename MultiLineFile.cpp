@@ -1,6 +1,7 @@
 #include "MultiLineFile.h"
 
 #include <iostream>
+#include <limits>
 
 MultiLineFile::MultiLineFile(const std::string& name) : Entry(name) {}
 
