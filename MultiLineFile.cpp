@@ -5,7 +5,8 @@
 
 MultiLineFile::MultiLineFile(const std::string& name) : Entry(name) {}
 
-void MultiLineFile::show() const { std::cout << "[FILE] " << name << "\n"; }
+void MultiLineFile::show() const {
+    std::cout << "[FILE] " << name << "\n"; }
 
 void MultiLineFile::edit() {
 
@@ -26,10 +27,17 @@ void MultiLineFile::edit() {
     std::cout << lines.size() << ": [Add new line]\n";
 
     int choice;
-    std::cout << "Choose line number to edit, or " << lines.size() << " to add: ";
+    std::cout 
+        << "Choose line number to edit, or " 
+        << lines.size() 
+        << " to add: ";
+
     std::cin >> choice;
 
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cin.ignore(
+        std::numeric_limits<std::streamsize>::max(),
+        '\n'
+    );
 
     if (choice >= 0 && choice < static_cast<int>(lines.size())) {
 
