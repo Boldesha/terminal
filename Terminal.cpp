@@ -17,16 +17,26 @@ void Terminal::parseCommand(const std::string& line) {
 
 	if (cmd == "help") {
 		std::cout
-			<< "  ls                 - show the content of the current directory\n"
-			<< "  cd <name|..>       - change a directory\n"
-			<< "  cat <name>         - show a file content\n"
-			<< "  touch <name>       - create a new file in the current directory\n"
-			<< "  mkdir <name>       - create a new directory\n"
-			<< "  rm <name>          - delete (hide) a file or directory\n"
-			<< "  restore <name>     - restore the earlier hidden entity\n"
-			<< "  mv <old> <new>     - rename a file or directory\n"
-			<< "  edit <name>        - change the file content\n"
-			<< "  exit               - exit\n";
+			<< "  ls                 "
+			"- show the content of the current directory\n"
+			<< "  cd <name|..>       "
+			"- change a directory\n"
+			<< "  cat <name>         "
+			"- show a file content\n"
+			<< "  touch <name>       "
+			"- create a new file in the current directory\n"
+			<< "  mkdir <name>       "
+			"- create a new directory\n"
+			<< "  rm <name>          "
+			"- delete (hide)a file or directory\n"
+			<< "  restore <name>     "
+			"- restore the earlier hidden entity\n"
+			<< "  mv <old> <new>     "
+			"- rename a file or directory\n"
+			<< "  edit <name>        "
+			"- change the file content\n"
+			<< "  exit               "
+			"- exit\n";
 	}
 
 	else if (cmd == "exit") {
@@ -40,18 +50,27 @@ void Terminal::parseCommand(const std::string& line) {
 	else if (cmd == "mkdir") {
 		std::string name;
 		iss >> name;
-		if (!name.empty()) current->addEntry(new Directory(name, current));
+		if (!name.empty()) {
+			current->addEntry(
+				new Directory(name, current));
+		}
 	}
 
 	else if (cmd == "touch") {
 		std::string name;
 		iss >> name;
-		if (name.empty()) { std::cout << "Usage: touch <name>\n"; return; }
+		if (name.empty()) {
+			std::cout 
+				<< "Usage: touch <name>\n";
+			return;
+		}
 
 		int type;
 		std::cout << "Type (1: single-line, 2: multi-line): ";
 		std::cin >> type;
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cin.ignore(
+			std::numeric_limits<std::streamsize>::max(),
+			'\n');
 
 		Entry* newFile = nullptr;
 		if (type == 1) newFile = new SingleLineFile(name);
@@ -68,7 +87,9 @@ void Terminal::parseCommand(const std::string& line) {
 		iss >> name;
 
 		if (name == "..") {
-			if (current->getParent()) current = current->getParent();
+			if (current->getParent()) {
+				current = current->getParent();
+			}
 			else std::cout << "Already at root.\n";
 		}
 
@@ -79,7 +100,12 @@ void Terminal::parseCommand(const std::string& line) {
 		}
 	}
 
-	else if (cmd == "cat" || cmd == "edit" || cmd == "rm" || cmd == "restore") {
+	else if (
+		cmd == "cat" ||
+		cmd == "edit" ||
+		cmd == "rm" ||
+		cmd == "restore")
+	{
 		std::string name;
 		iss >> name;
 		Entry* e = current->find(name);
@@ -105,7 +131,9 @@ void Terminal::parseCommand(const std::string& line) {
 			std::cout << "Renamed to '" << newName << "'.\n";
 		}
 		else {
-			std::cout << "Entity '" << oldName << "' not found.\n";
+			std::cout << "Entity '" 
+				<< oldName 
+				<< "' not found.\n";
 		}
 	}
 }
